@@ -10,13 +10,15 @@ const port = process.env.SERVER_PORT;
 const app = express();
 app.use(cors());
 
+const productRoute = require('./routes/ProductRoute');
+
 
 //=======================================
 const eurekaClient = new Eureka({
     instance: {
         app: 'utility-service-api',
         hostName: 'localhost',
-        instanceId:'utility-service',
+        instanceId: 'utility-service',
         ipAddr: '127.0.0.1',
         port: {
             '$': port,
@@ -38,21 +40,22 @@ const eurekaClient = new Eureka({
         servicePath: '/eureka/apps/'
     }
 });
-eurekaClient.start(function(error) {
+eurekaClient.start(function (error) {
     console.log('########################################################');
-    console.log(JSON.stringify(error) || 'Eureka registration complete');   });
+    console.log(JSON.stringify(error) || 'Eureka registration complete');
+});
 //=======================================
 
 
-app.use(bodyParser.urlencoded({extend:false}));
+app.use(bodyParser.urlencoded({extend: false}));
 app.use(bodyParser.json());
 
-try{
+try {
     mongoose.connect('mongodb://localhost:27017/product_db');
-    app.listen(port,()=>{
+    app.listen(port, () => {
         console.log('server up and running!');
     })
-}catch (e){
+} catch (e) {
     console.log(e)
 }
 
@@ -66,3 +69,5 @@ process.on('SIGINT', () => {
         process.exit();
     });
 })
+
+app.use('/api/v1/products', productRoute);
