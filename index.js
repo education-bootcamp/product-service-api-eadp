@@ -23,11 +23,15 @@ const eurekaClient = new Eureka({
             '@enabled': true
         },
         vipAddress: 'jq.test.something.com',
+        statusPageUrl: 'http://localhost:3002/info',
         dataCenterInfo: {
             '@class': 'com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo',
             name: 'MyOwn',
         },
+        registerWithEureka: true,
+        fetchRegistry: true
     },
+
     eureka: {
         host: '127.0.0.1',
         port: 8761,
