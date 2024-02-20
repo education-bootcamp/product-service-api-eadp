@@ -14,7 +14,7 @@ const discountSchema= new mongoose.Schema(
             required:true
         },
         productId:{
-            type:String,
+            type:Object,
             required:true
         }
     }

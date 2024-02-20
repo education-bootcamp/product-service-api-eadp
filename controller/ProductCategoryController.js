@@ -13,14 +13,14 @@ const saveData=(request,response)=>{
 }
 const loadAllData = async (request,response) => {
 
-    const page= parseInt(request.query.page) || 1;
+    const page= parseInt(request.query.page) || 0;
     const size= parseInt(request.query.size) || 10;
 
     try{
         const totalCountData = await ProductCategorySchema.countDocuments();
         const totalPages = Math.ceil(totalCountData/size);
 
-        const skip = (page-1) * size; // offset
+        const skip = page * size; // offset
 
         const data = await ProductCategorySchema.find({}).skip(skip).limit(size).exec();
 

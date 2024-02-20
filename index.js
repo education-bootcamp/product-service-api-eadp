@@ -12,6 +12,7 @@ app.use(cors());
 
 const productRoute = require('./routes/ProductRoute');
 const ProductcategoryRoute = require('./routes/ProductcategoryRoute');
+const DiscountRoute = require('./routes/DiscountRoute');
 
 
 //=======================================
@@ -60,7 +61,7 @@ try {
     console.log(e)
 }
 
-app.get('/api/v1/test', (req, resp, next) => {
+app.get('/api/v1/test', (req, resp, next) => {  
     resp.send(`<h2>Hello User (Product Service)</h2>`);
 });
 
@@ -73,3 +74,4 @@ process.on('SIGINT', () => {
 
 app.use('/api/v1/products', productRoute);
 app.use('/api/v1/categories', ProductcategoryRoute);
+app.use('/api/v1/discounts', DiscountRoute);
