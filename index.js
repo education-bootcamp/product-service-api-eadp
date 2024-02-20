@@ -11,6 +11,7 @@ const app = express();
 app.use(cors());
 
 const productRoute = require('./routes/ProductRoute');
+const ProductcategoryRoute = require('./routes/ProductcategoryRoute');
 
 
 //=======================================
@@ -71,3 +72,4 @@ process.on('SIGINT', () => {
 })
 
 app.use('/api/v1/products', productRoute);
+app.use('/api/v1/categories', ProductcategoryRoute);
